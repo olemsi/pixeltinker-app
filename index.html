@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>PixelTinker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="pixel-egg">🥚</div>
+            <h1>PixelTinker</h1>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="progress-bar">
+            <div class="progress-segment filled" data-step="0"></div>
+            <div class="progress-segment" data-step="1"></div>
+            <div class="progress-segment" data-step="2"></div>
+            <div class="progress-segment" data-step="3"></div>
+            <div class="progress-segment" data-step="4"></div>
+        </div>
+        <div class="step-label" id="step-label">Шаг 1 из 5</div>
+
+        <!-- Step 1: Service -->
+        <div class="step active" id="step-service">
+            <h2>Что будем менять? 🔧</h2>
+            <div class="options">
+                <button class="pixel-btn" onclick="selectService('reflash_meets')">
+                    <span class="btn-icon">🔮</span>
+                    <span class="btn-text">Версию MEETS / ON / Some</span>
+                </button>
+                <button class="pixel-btn" onclick="selectService('reflash_smart_lang')">
+                    <span class="btn-icon">💬</span>
+                    <span class="btn-text">Язык SMART на английский</span>
+                </button>
+                <button class="pixel-btn" onclick="selectService('reflash_idl_lang')">
+                    <span class="btn-icon">💬</span>
+                    <span class="btn-text">Язык iDL на английский</span>
+                </button>
+                <button class="pixel-btn" onclick="selectService('reflash_mix')">
+                    <span class="btn-icon">🧬</span>
+                    <span class="btn-text">Версию M!X</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Device -->
+        <div class="step" id="step-device">
+            <h2>Какой у тебя тамагочи? 🥚</h2>
+            <div class="options" id="device-options"></div>
+        </div>
+
+        <!-- Step 3: Firmware -->
+        <div class="step" id="step-firmware">
+            <h2>На какую версию? ✨</h2>
+            <div class="options" id="firmware-options"></div>
+        </div>
+
+        <!-- Step 4: Delivery -->
+        <div class="step" id="step-delivery">
+            <h2>Способ доставки 📦</h2>
+            <div class="options">
+                <button class="pixel-btn" onclick="selectDelivery('CDEK')">
+                    <span class="btn-icon">📦</span>
+                    <span class="btn-text">CDEK</span>
+                    <span class="btn-desc">Путилково, ул. Новотушинская, 1</span>
+                </button>
+                <button class="pixel-btn" onclick="selectDelivery('Boxberry')">
+                    <span class="btn-icon">📦</span>
+                    <span class="btn-text">Boxberry</span>
+                    <span class="btn-desc">Путилково, ул. Новотушинская, 4</span>
+                </button>
+                <button class="pixel-btn" onclick="selectDelivery('Почта России')">
+                    <span class="btn-icon">📬</span>
+                    <span class="btn-text">Почта России</span>
+                    <span class="btn-desc">Красногорск, Путилково д., стр 19</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 5: Summary -->
+        <div class="step" id="step-summary">
+            <h2>Проверь заказ 📋</h2>
+            <div class="summary-card">
+                <div class="summary-row" id="sum-service"></div>
+                <div class="summary-row" id="sum-device"></div>
+                <div class="summary-row" id="sum-firmware"></div>
+                <div class="summary-row" id="sum-delivery"></div>
+            </div>
+            <div class="summary-note">
+                После оформления свяжусь для уточнения деталей доставки 💌
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

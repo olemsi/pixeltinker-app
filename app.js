@@ -86,16 +86,16 @@ function showStep(name) {
     currentStep = stepNames.indexOf(name);
     updateProgress(currentStep);
 
-    // Show/hide Telegram back button
     if (currentStep > 0) {
         tg.BackButton.show();
     } else {
         tg.BackButton.hide();
     }
 
-    // Show/hide main button on summary
     if (name === 'summary') {
-        tg.MainButton.setText('✅ ОФОРМИТЬ ЗАКАЗ');
+        tg.MainButton.setText('💖 Оформить заказ');
+        tg.MainButton.color = '#f8a4c8';
+        tg.MainButton.textColor = '#ffffff';
         tg.MainButton.show();
     } else {
         tg.MainButton.hide();
@@ -103,16 +103,20 @@ function showStep(name) {
 }
 
 function updateProgress(step) {
-    document.querySelectorAll('.progress-segment').forEach((seg, i) => {
-        seg.classList.toggle('filled', i <= step);
+    // Update dots
+    document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+        dot.classList.toggle('filled', i <= step);
     });
 
-    // Calculate actual step number (accounting for skipped steps)
+    // Update lines
+    document.querySelectorAll('.progress-line').forEach((line, i) => {
+        line.classList.toggle('filled', i < step);
+    });
+
     const service = SERVICES[order.serviceId];
     let totalSteps, currentNum;
 
     if (service && service.skipTo) {
-        // Smart/iDL: service → delivery → summary = 3 steps
         totalSteps = 3;
         if (step === 0) currentNum = 1;
         else if (step === 3) currentNum = 2;
@@ -133,7 +137,6 @@ function selectService(serviceId) {
     order.serviceId = serviceId;
 
     if (service.skipTo) {
-        // Smart/iDL — auto-fill device and firmware, skip to delivery
         order.device = service.autoDevice;
         order.firmware = service.autoFirmware;
         showStep('delivery');
@@ -150,8 +153,10 @@ function renderDevices(serviceId) {
 
     devices.forEach(d => {
         const btn = document.createElement('button');
-        btn.className = 'pixel-btn';
-        btn.innerHTML = `<span class="btn-icon">${d.label.split(' ')[0]}</span><span class="btn-text">${d.label.substring(d.label.indexOf(' ') + 1)}</span>`;
+        btn.className = 'cozy-btn';
+        const emoji = d.label.split(' ')[0];
+        const text = d.label.substring(d.label.indexOf(' ') + 1);
+        btn.innerHTML = `<span class="btn-emoji">${emoji}</span><div class="btn-content"><span class="btn-title">${text}</span></div>`;
         btn.onclick = () => selectDevice(d.value);
         container.appendChild(btn);
     });
@@ -168,7 +173,6 @@ function renderFirmwares(serviceId) {
     const firmwares = FIRMWARES[serviceId] || [];
     container.innerHTML = '';
 
-    // Use grid layout for many options
     if (firmwares.length > 4) {
         container.className = 'options firmware-grid';
     } else {
@@ -177,8 +181,10 @@ function renderFirmwares(serviceId) {
 
     firmwares.forEach(f => {
         const btn = document.createElement('button');
-        btn.className = 'pixel-btn';
-        btn.innerHTML = `<span class="btn-icon">${f.label.split(' ')[0]}</span><span class="btn-text">${f.label.substring(f.label.indexOf(' ') + 1)}</span>`;
+        btn.className = 'cozy-btn';
+        const emoji = f.label.split(' ')[0];
+        const text = f.label.substring(f.label.indexOf(' ') + 1);
+        btn.innerHTML = `<span class="btn-emoji">${emoji}</span><div class="btn-content"><span class="btn-title">${text}</span></div>`;
         btn.onclick = () => selectFirmware(f.value);
         container.appendChild(btn);
     });
@@ -196,13 +202,13 @@ function selectDelivery(value) {
 
 function showSummary() {
     document.getElementById('sum-service').innerHTML =
-        `<span class="label">УСЛУГА</span><span class="value">${order.service}</span>`;
+        `<span class="label">Услуга</span><span class="value">${order.service}</span>`;
     document.getElementById('sum-device').innerHTML =
-        `<span class="label">УСТРОЙСТВО</span><span class="value">${order.device}</span>`;
+        `<span class="label">Устройство</span><span class="value">${order.device}</span>`;
     document.getElementById('sum-firmware').innerHTML =
-        `<span class="label">ПРОШИВКА</span><span class="value">${order.firmware}</span>`;
+        `<span class="label">Прошивка</span><span class="value">${order.firmware}</span>`;
     document.getElementById('sum-delivery').innerHTML =
-        `<span class="label">ДОСТАВКА</span><span class="value">${order.delivery}</span>`;
+        `<span class="label">Доставка</span><span class="value">${order.delivery}</span>`;
 
     showStep('summary');
 }
@@ -233,12 +239,9 @@ tg.BackButton.onClick(() => {
     const service = SERVICES[order.serviceId];
 
     if (currentStep === 4) {
-        // Summary → back to delivery
         showStep('delivery');
     } else if (currentStep === 3) {
-        // Delivery → back depends on service type
         if (service && service.skipTo) {
-            // Smart/iDL: delivery → service
             showStep('service');
         } else {
             showStep('firmware');

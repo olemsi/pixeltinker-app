@@ -6,7 +6,7 @@
     <title>PixelTinker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -14,17 +14,22 @@
     <div id="app">
         <!-- Header -->
         <div class="header">
-            <div class="pixel-egg">🥚</div>
+            <div class="kawaii-egg">🐣</div>
             <h1>PixelTinker</h1>
+            <p class="subtitle">перепрошивка тамагочи</p>
         </div>
 
         <!-- Progress bar -->
         <div class="progress-bar">
-            <div class="progress-segment filled" data-step="0"></div>
-            <div class="progress-segment" data-step="1"></div>
-            <div class="progress-segment" data-step="2"></div>
-            <div class="progress-segment" data-step="3"></div>
-            <div class="progress-segment" data-step="4"></div>
+            <div class="progress-dot filled" data-step="0"><span>1</span></div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="1"><span>2</span></div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="2"><span>3</span></div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="3"><span>4</span></div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="4"><span>5</span></div>
         </div>
         <div class="step-label" id="step-label">Шаг 1 из 5</div>
 
@@ -32,21 +37,33 @@
         <div class="step active" id="step-service">
             <h2>Что будем менять? 🔧</h2>
             <div class="options">
-                <button class="pixel-btn" onclick="selectService('reflash_meets')">
-                    <span class="btn-icon">🔮</span>
-                    <span class="btn-text">Версию MEETS / ON / Some</span>
+                <button class="cozy-btn" onclick="selectService('reflash_meets')">
+                    <span class="btn-emoji">🔮</span>
+                    <div class="btn-content">
+                        <span class="btn-title">Версию MEETS / ON / Some</span>
+                        <span class="btn-hint">Смена прошивки устройства</span>
+                    </div>
                 </button>
-                <button class="pixel-btn" onclick="selectService('reflash_smart_lang')">
-                    <span class="btn-icon">💬</span>
-                    <span class="btn-text">Язык SMART на английский</span>
+                <button class="cozy-btn" onclick="selectService('reflash_smart_lang')">
+                    <span class="btn-emoji">💬</span>
+                    <div class="btn-content">
+                        <span class="btn-title">Язык SMART на английский</span>
+                        <span class="btn-hint">Смена языка интерфейса</span>
+                    </div>
                 </button>
-                <button class="pixel-btn" onclick="selectService('reflash_idl_lang')">
-                    <span class="btn-icon">💬</span>
-                    <span class="btn-text">Язык iDL на английский</span>
+                <button class="cozy-btn" onclick="selectService('reflash_idl_lang')">
+                    <span class="btn-emoji">💬</span>
+                    <div class="btn-content">
+                        <span class="btn-title">Язык iDL на английский</span>
+                        <span class="btn-hint">Смена языка интерфейса</span>
+                    </div>
                 </button>
-                <button class="pixel-btn" onclick="selectService('reflash_mix')">
-                    <span class="btn-icon">🧬</span>
-                    <span class="btn-text">Версию M!X</span>
+                <button class="cozy-btn" onclick="selectService('reflash_mix')">
+                    <span class="btn-emoji">🧬</span>
+                    <div class="btn-content">
+                        <span class="btn-title">Версию M!X</span>
+                        <span class="btn-hint">Смена прошивки M!X</span>
+                    </div>
                 </button>
             </div>
         </div>
@@ -67,36 +84,42 @@
         <div class="step" id="step-delivery">
             <h2>Способ доставки 📦</h2>
             <div class="options">
-                <button class="pixel-btn" onclick="selectDelivery('CDEK')">
-                    <span class="btn-icon">📦</span>
-                    <span class="btn-text">CDEK</span>
-                    <span class="btn-desc">Путилково, ул. Новотушинская, 1</span>
+                <button class="cozy-btn" onclick="selectDelivery('CDEK')">
+                    <span class="btn-emoji">📦</span>
+                    <div class="btn-content">
+                        <span class="btn-title">CDEK</span>
+                        <span class="btn-hint">Парфёновская ул., 9 корп. 1</span>
+                    </div>
                 </button>
-                <button class="pixel-btn" onclick="selectDelivery('Boxberry')">
-                    <span class="btn-icon">📦</span>
-                    <span class="btn-text">Boxberry</span>
-                    <span class="btn-desc">Путилково, ул. Новотушинская, 4</span>
+                <button class="cozy-btn" onclick="selectDelivery('Boxberry')">
+                    <span class="btn-emoji">📦</span>
+                    <div class="btn-content">
+                        <span class="btn-title">Boxberry</span>
+                        <span class="btn-hint">Московский пр-кт, 137</span>
+                    </div>
                 </button>
-                <button class="pixel-btn" onclick="selectDelivery('Почта России')">
-                    <span class="btn-icon">📬</span>
-                    <span class="btn-text">Почта России</span>
-                    <span class="btn-desc">Красногорск, Путилково д., стр 19</span>
+                <button class="cozy-btn" onclick="selectDelivery('Почта России')">
+                    <span class="btn-emoji">📬</span>
+                    <div class="btn-content">
+                        <span class="btn-title">Почта России</span>
+                        <span class="btn-hint">Московский пр-кт, 75А</span>
+                    </div>
                 </button>
             </div>
         </div>
 
         <!-- Step 5: Summary -->
         <div class="step" id="step-summary">
-            <h2>Проверь заказ 📋</h2>
+            <h2>Проверь заказ 💖</h2>
             <div class="summary-card">
                 <div class="summary-row" id="sum-service"></div>
                 <div class="summary-row" id="sum-device"></div>
                 <div class="summary-row" id="sum-firmware"></div>
                 <div class="summary-row" id="sum-delivery"></div>
             </div>
-            <div class="summary-note">
+            <p class="summary-note">
                 После оформления свяжусь для уточнения деталей доставки 💌
-            </div>
+            </p>
         </div>
     </div>
 
